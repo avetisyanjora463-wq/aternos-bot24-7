@@ -12,7 +12,7 @@ jobs:
       - name: Start Minecraft Bot
         uses: Minionguyjpro/Afk-bot@v1.0.3
         with:
-          ip: 'ձեր_սերվերի_ip.aternos.me' # Փոխեք սա ձեր իրական Aternos IP-ով
-          port: 25565                     # Փոխեք, եթե ձեր պորտը տարբեր է
-          name: 'GitHub_AFK_Bot'          # Բոտի անունը խաղի մեջ
+          ip: 'cristalhub.aternos.me:28793' # Փոխեք սա ձեր իրական Aternos IP-ով
+          port: 28793                    # Փոխեք, եթե ձեր պորտը տարբեր է
+          name: 'revrestob'          # Բոտի անունը խաղի մեջ
           auto-night-skip: false
