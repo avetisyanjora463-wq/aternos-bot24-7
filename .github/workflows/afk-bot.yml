@@ -1,19 +1,43 @@
-name: Aternos 24/7 AFK Bot
+name: Aternos 24/7 Custom Bot
 
 on:
   push:
   schedule:
-    - cron: '*/20 * * * *' # Սա ամեն 30 րոպեն մեկ ավտոմատ կթարմացնի բոտը, որ սերվերը չանջատվի
+    - cron: '*/25 * * * *' # Ամեն 25 րոպեն մեկ ավտոմատ կթարմացնի բոտը
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Start Minecraft Bot
-        uses: Minionguyjpro/Afk-bot@v1.0.3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          ip: 'cristalhub.aternos.me' # Փոխեք սա ձեր իրական Aternos IP-ով
-          port: 28793                    # Փոխեք, եթե ձեր պորտը տարբեր է
-          name: 'revrestob'          # Բոտի անունը խաղի մեջ
-          version: '1.21.4'
-          auto-night-skip: false
+          node-version: 20
+
+      - name: Install Mineflayer
+        run: npm install mineflayer
+
+      - name: Run 24/7 Minecraft Bot
+        run: |
+          node -e "
+          const mineflayer = require('mineflayer');
+          const bot = mineflayer.createBot({
+            host: 'cristalhub.aternos.me',
+            port: 28793,
+            username: 'revrestob',
+            version: '1.21.4',
+            checkTimeoutInterval: 60000
+          });
+          bot.on('spawn', () => {
+            console.log('Bot successfully joined cristalhub!');
+            setInterval(() => {
+              bot.setControlState('jump', true);
+              setTimeout(() => bot.setControlState('jump', false), 500);
+            }, 10000);
+          });
+          bot.on('error', (err) => console.log('Error:', err.message));
+          bot.on('end', (reason) => console.log('Disconnected:', reason));
+          
+          // Ավտոմատ անջատում 24 րոպեից, որպեսզի հաջորդ cron-ը փոխարինի նրան անդադար
+          setTimeout(() => { console.log('Restarting workflow...'); process.exit(0); }, 24 * 60 * 1000);
+          "
