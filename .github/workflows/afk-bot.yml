@@ -15,4 +15,5 @@ jobs:
           ip: 'cristalhub.aternos.me' # Փոխեք սա ձեր իրական Aternos IP-ով
           port: 28793                    # Փոխեք, եթե ձեր պորտը տարբեր է
           name: 'revrestob'          # Բոտի անունը խաղի մեջ
+          version: '1.20.4'
           auto-night-skip: false
