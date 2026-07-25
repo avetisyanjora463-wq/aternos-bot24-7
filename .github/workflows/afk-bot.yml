@@ -3,7 +3,7 @@ name: Aternos 24/7 AFK Bot
 on:
   push:
   schedule:
-    - cron: '*/30 * * * *' # Սա ամեն 30 րոպեն մեկ ավտոմատ կթարմացնի բոտը, որ սերվերը չանջատվի
+    - cron: '*/20 * * * *' # Սա ամեն 30 րոպեն մեկ ավտոմատ կթարմացնի բոտը, որ սերվերը չանջատվի
 
 jobs:
   run-bot:
@@ -12,7 +12,7 @@ jobs:
       - name: Start Minecraft Bot
         uses: Minionguyjpro/Afk-bot@v1.0.3
         with:
-          ip: 'cristalhub.aternos.me:28793' # Փոխեք սա ձեր իրական Aternos IP-ով
+          ip: 'cristalhub.aternos.me' # Փոխեք սա ձեր իրական Aternos IP-ով
           port: 28793                    # Փոխեք, եթե ձեր պորտը տարբեր է
           name: 'revrestob'          # Բոտի անունը խաղի մեջ
           auto-night-skip: false
